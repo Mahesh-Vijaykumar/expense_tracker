@@ -7,7 +7,8 @@ exports.addIncome=async(req, res) => {
         amount,
         category,
         description,
-        date
+        date,
+        user: req.userId
     })
     try{
         if(!title||!description||!date||!category){
@@ -26,7 +27,7 @@ exports.addIncome=async(req, res) => {
 
 exports.getIncomes=async(req, res) => {
     try{
-        const incomes = await IncomeSchema.find().sort({createdAt:-1})
+        const incomes = await IncomeSchema.find({ user: req.userId }).sort({createdAt:-1})
         res.status(200).json(incomes)
     }catch(e){
         res.status(500).json({message:"Server Error"})
@@ -35,8 +36,11 @@ exports.getIncomes=async(req, res) => {
 
 exports.deleteIncome=async(req, res) => {
     const {id} = req.params
-    IncomeSchema.findByIdAndDelete(id)
+    IncomeSchema.findOneAndDelete({ _id: id, user: req.userId })
         .then(income => {
+            if (!income) {
+                return res.status(404).json({message:"Income not found or unauthorized"})
+            }
             res.status(200).json({message:"Income deleted successfully"})
         })
         .catch(e => {

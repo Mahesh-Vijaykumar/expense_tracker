@@ -2,7 +2,8 @@ import React from "react";
 import {useState, useContext} from "react";
 import axios from "axios";
 import Expenses from "../Components/Expenses/expenses";
-const BASE_URL = "http://localhost:5000/api/v1/";
+import {useAuth} from "./authContext";
+const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api/v1/";
 
 const GlobalContext = React.createContext()
 
@@ -10,9 +11,11 @@ export const GlobalProvider = ({ children }) => {
     const [incomes,setIncomes] = useState([]);
     const [expenses,setExpenses] = useState([]);
     const [error,setError] = useState(null);
+    const { token } = useAuth();
 
 
     const addIncome = async (income) => {
+        if (!token) return;
         const response = await axios.post(`${BASE_URL}add-income`, income)
             .catch((err) =>{
                 setError(err.response.data.message)
@@ -20,6 +23,7 @@ export const GlobalProvider = ({ children }) => {
         getIncomes()
     }
     const getIncomes = async () => {
+        if (!token) return;
         const response = await axios.get(`${BASE_URL}get-incomes`)
         setIncomes(response.data)
         console.log(response.data)
@@ -37,6 +41,7 @@ export const GlobalProvider = ({ children }) => {
         return totalIncome;
     }
     const addExpense = async (expense) => {
+        if (!token) return;
         const response = await axios.post(`${BASE_URL}add-expense`, expense)
             .catch((err) =>{
                 setError(err.response.data.message)
@@ -44,6 +49,7 @@ export const GlobalProvider = ({ children }) => {
         getExpenses()
     }
     const getExpenses = async () => {
+        if (!token) return;
         const response = await axios.get(`${BASE_URL}get-expenses`)
         setExpenses(response.data)
         console.log(response.data)

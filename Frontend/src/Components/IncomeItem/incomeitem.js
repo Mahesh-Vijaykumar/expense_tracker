@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { dollar,calender,comment,trash,money,freelance,stocks,users,bitcoin,card,yt,piggy,book, food,medical,tv,takeaway,clothing,circle } from '../../Utils/icons';
+import { rupee,calender,comment,trash,money,freelance,stocks,users,bitcoin,card,yt,piggy,book, food,medical,tv,takeaway,clothing,circle } from '../../Utils/icons';
 import Button from "../Button/button";
 import {dateFormat} from "../../Utils/dateFormat";
+import {useTheme} from "../../Context/themeContext";
 
 function IncomeItem({
                         id,
@@ -15,6 +16,7 @@ function IncomeItem({
                         indicatorColor,
                         type
                     }) {
+    const { isDarkMode } = useTheme();
     const categoryIcon = () =>{
         switch(category) {
             case 'salary':
@@ -60,7 +62,7 @@ function IncomeItem({
         }
     }
     return(
-        <IncomeItemStyled indicator={indicatorColor}>
+        <IncomeItemStyled indicator={indicatorColor} isDarkMode={isDarkMode}>
             <div className="icon">
                 {type==='expense' ? expenseCatIcon() : categoryIcon()}
             </div>
@@ -68,7 +70,7 @@ function IncomeItem({
                 <h5>{title}</h5>
                 <div className="inner-content">
                     <div className="text">
-                        <p>{dollar} {amount}</p>
+                        <p>₹ {amount}</p>
                         <p>{calender} {dateFormat(date)}</p>
                         <p>{comment} {description}</p>
                     </div>
@@ -91,8 +93,12 @@ function IncomeItem({
 }
 
 const IncomeItemStyled = styled.div`
-    background: #FCF6F9;
-    border: 2px solid #FFFFFF;
+    background: ${props => props.isDarkMode 
+        ? 'rgba(26, 26, 46, 0.6)' 
+        : '#FCF6F9'};
+    border: 2px solid ${props => props.isDarkMode 
+        ? 'rgba(255, 255, 255, 0.1)' 
+        : '#FFFFFF'};
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
     border-radius: 20px;
     padding: 1rem;
@@ -101,18 +107,24 @@ const IncomeItemStyled = styled.div`
     align-items: center;
     gap: 1rem;
     width: 100%;
-    color: #222260;
+    color: ${props => props.isDarkMode ? '#e0e0e0' : '#222260'};
+    transition: all 0.3s ease;
     .icon{
         width: 80px;
         height: 80px;
         border-radius: 20px;
-        background: #F5F5F5;
+        background: ${props => props.isDarkMode 
+            ? 'rgba(102, 126, 234, 0.2)' 
+            : '#F5F5F5'};
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 2px solid #FFFFFF;
+        border: 2px solid ${props => props.isDarkMode 
+            ? 'rgba(255, 255, 255, 0.1)' 
+            : '#FFFFFF'};
         i{
             font-size: 2.6rem;
+            color: ${props => props.isDarkMode ? '#667eea' : 'inherit'};
         }
     }
 
@@ -150,7 +162,7 @@ const IncomeItemStyled = styled.div`
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
-                    color: var(--primary-color);
+                    color: ${props => props.isDarkMode ? '#e0e0e0' : 'var(--primary-color)'};
                     opacity: 0.8;
                 }
             }

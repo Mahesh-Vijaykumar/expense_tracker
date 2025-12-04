@@ -6,9 +6,11 @@ import {useState} from "react";
 import {useGlobalContext} from "../../Context/globalContext";
 import Button from '../Button/button';
 import { plus } from '../../Utils/icons';
+import {useTheme} from "../../Context/themeContext";
 
 function Form() {
     const {addIncome,getIncomes,error,setError} = useGlobalContext()
+    const { isDarkMode } = useTheme();
 
     const [inputState, setInputState] = useState({
         title: '',
@@ -36,7 +38,7 @@ function Form() {
         })
     }
     return(
-        <FormStyled onSubmit={handleSubmit}>
+        <FormStyled onSubmit={handleSubmit} isDarkMode={isDarkMode}>
             <div className="input-control">
                 {error && <p className='error'>{error}</p>}
                 <input
@@ -110,14 +112,20 @@ const FormStyled = styled.form`
         outline: none;
         padding: .5rem 1rem;
         border-radius: 5px;
-        border: 2px solid #fff;
-        background: transparent;
+        border: 2px solid ${props => props.isDarkMode ? 'rgba(255, 255, 255, 0.1)' : '#fff'};
+        background: ${props => props.isDarkMode ? 'rgba(26, 26, 46, 0.3)' : 'transparent'};
         resize: none;
         box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
-        color: rgba(34, 34, 96, 0.9);
+        color: ${props => props.isDarkMode ? '#e0e0e0' : 'rgba(34, 34, 96, 0.9)'};
+        transition: all 0.3s ease;
 
         &::placeholder {
-            color: rgba(34, 34, 96, 0.4);
+            color: ${props => props.isDarkMode ? 'rgba(224, 224, 224, 0.5)' : 'rgba(34, 34, 96, 0.4)'};
+        }
+
+        &:focus {
+            border-color: ${props => props.isDarkMode ? 'rgba(102, 126, 234, 0.5)' : '#fff'};
+            background: ${props => props.isDarkMode ? 'rgba(26, 26, 46, 0.5)' : 'transparent'};
         }
     }
 
@@ -132,12 +140,21 @@ const FormStyled = styled.form`
         justify-content: flex-end;
 
         select {
-            color: rgba(34, 34, 96, 0.4);
+            color: ${props => props.isDarkMode ? 'rgba(224, 224, 224, 0.7)' : 'rgba(34, 34, 96, 0.4)'};
 
             &:focus, &:active {
-                color: rgba(34, 34, 96, 1);
+                color: ${props => props.isDarkMode ? '#e0e0e0' : 'rgba(34, 34, 96, 1)'};
+            }
+
+            option {
+                background: ${props => props.isDarkMode ? '#1a1a2e' : '#fff'};
+                color: ${props => props.isDarkMode ? '#e0e0e0' : '#222260'};
             }
         }
+    }
+
+    .error {
+        color: ${props => props.isDarkMode ? '#ff6b6b' : 'red'};
     }
 
     .submit-btn {
