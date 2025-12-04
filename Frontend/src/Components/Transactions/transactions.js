@@ -191,12 +191,20 @@ const TransactionsStyled = styled.div`
                 : 'rgba(0, 0, 0, 0.02)'};
             border-radius: 12px;
             transition: all 0.3s ease;
+            
+            @media (max-width: 768px) {
+                padding: 0.875rem;
+            }
 
             &:hover {
                 background: ${props => props.isDarkMode 
                     ? 'rgba(255, 255, 255, 0.05)' 
                     : 'rgba(0, 0, 0, 0.04)'};
                 transform: translateX(5px);
+                
+                @media (max-width: 768px) {
+                    transform: none;
+                }
             }
 
             .transaction-left {
@@ -204,6 +212,11 @@ const TransactionsStyled = styled.div`
                 align-items: center;
                 gap: 1rem;
                 flex: 1;
+                min-width: 0; /* Allows text to wrap */
+                
+                @media (max-width: 480px) {
+                    gap: 0.75rem;
+                }
 
                 .icon-wrapper {
                     width: 45px;
@@ -213,22 +226,32 @@ const TransactionsStyled = styled.div`
                     align-items: center;
                     justify-content: center;
                     font-size: 1.2rem;
+                    flex-shrink: 0;
+                    
+                    @media (max-width: 480px) {
+                        width: 40px;
+                        height: 40px;
+                        font-size: 1rem;
+                    }
                 }
 
                 .transaction-info {
                     display: flex;
                     flex-direction: column;
                     gap: 0.3rem;
+                    min-width: 0;
+                    flex: 1;
 
                     .transaction-title {
                         font-weight: 600;
-                        font-size: 0.95rem;
+                        font-size: clamp(0.85rem, 1.5vw, 0.95rem);
                         color: ${props => props.isDarkMode ? '#e0e0e0' : '#333'};
                         margin: 0;
+                        word-wrap: break-word;
                     }
 
                     .transaction-date {
-                        font-size: 0.8rem;
+                        font-size: clamp(0.75rem, 1.2vw, 0.8rem);
                         color: ${props => props.isDarkMode 
                             ? 'rgba(224, 224, 224, 0.6)' 
                             : 'rgba(0, 0, 0, 0.6)'};
@@ -238,9 +261,11 @@ const TransactionsStyled = styled.div`
             }
 
             .transaction-right {
+                flex-shrink: 0;
+                
                 .transaction-amount {
                     font-weight: 700;
-                    font-size: 1rem;
+                    font-size: clamp(0.9rem, 1.5vw, 1rem);
 
                     &.expense {
                         color: #FF0000;

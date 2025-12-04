@@ -106,6 +106,11 @@ const ExpenseFormStyled = styled.form`
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    
+    /* Mobile styles */
+    @media (max-width: 768px) {
+        gap: 1.5rem;
+    }
 
     input, textarea, select {
         font-family: inherit;
@@ -119,6 +124,12 @@ const ExpenseFormStyled = styled.form`
         box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
         color: ${props => props.isDarkMode ? '#e0e0e0' : 'rgba(34, 34, 96, 0.9)'};
         transition: all 0.3s ease;
+        min-height: 44px; /* Touch-friendly */
+        
+        @media (max-width: 768px) {
+            padding: 0.75rem 1rem;
+            font-size: 16px; /* Prevents zoom on iOS */
+        }
 
         &::placeholder {
             color: ${props => props.isDarkMode ? 'rgba(224, 224, 224, 0.5)' : 'rgba(34, 34, 96, 0.4)'};
@@ -139,9 +150,18 @@ const ExpenseFormStyled = styled.form`
     .selects {
         display: flex;
         justify-content: flex-end;
+        
+        @media (max-width: 768px) {
+            justify-content: stretch;
+        }
 
         select {
             color: ${props => props.isDarkMode ? 'rgba(224, 224, 224, 0.7)' : 'rgba(34, 34, 96, 0.4)'};
+            width: 100%;
+            
+            @media (max-width: 768px) {
+                width: 100%;
+            }
 
             &:focus, &:active {
                 color: ${props => props.isDarkMode ? '#e0e0e0' : 'rgba(34, 34, 96, 1)'};
@@ -156,11 +176,20 @@ const ExpenseFormStyled = styled.form`
 
     .error {
         color: ${props => props.isDarkMode ? '#ff6b6b' : 'red'};
+        font-size: 0.9rem;
+        padding: 0.5rem;
     }
 
     .submit-btn {
         button {
             box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.06);
+            min-height: 48px; /* Touch-friendly */
+            width: 100%;
+            
+            @media (max-width: 768px) {
+                width: 100%;
+                padding: 1rem;
+            }
 
             &:hover {
                 background: var(--color-delete) !important;

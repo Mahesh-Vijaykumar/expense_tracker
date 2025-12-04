@@ -106,12 +106,22 @@ const PieChartStyled = styled.div`
     padding: 1.5rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    
+    @media (max-width: 768px) {
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
 
     .chart-header {
         margin-bottom: 1.5rem;
+        
+        @media (max-width: 768px) {
+            margin-bottom: 1rem;
+        }
+        
         h3 {
             color: ${props => props.isDarkMode ? '#e0e0e0' : '#333'};
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             font-weight: 600;
             margin: 0;
         }
@@ -123,6 +133,14 @@ const PieChartStyled = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+        
+        @media (max-width: 768px) {
+            height: 250px;
+        }
+        
+        @media (max-width: 480px) {
+            height: 220px;
+        }
 
         .chart-wrapper {
             width: 100%;
@@ -140,14 +158,14 @@ const PieChartStyled = styled.div`
 
             .center-label {
                 display: block;
-                font-size: 0.9rem;
+                font-size: clamp(0.8rem, 1.5vw, 0.9rem);
                 color: ${props => props.isDarkMode ? 'rgba(224, 224, 224, 0.7)' : 'rgba(0, 0, 0, 0.6)'};
                 margin-bottom: 0.3rem;
             }
 
             .center-amount {
                 display: block;
-                font-size: 1.5rem;
+                font-size: clamp(1.2rem, 2.5vw, 1.5rem);
                 font-weight: 700;
                 color: ${props => props.isDarkMode ? '#e0e0e0' : '#333'};
             }

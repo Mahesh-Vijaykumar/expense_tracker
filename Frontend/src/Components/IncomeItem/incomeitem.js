@@ -109,6 +109,15 @@ const IncomeItemStyled = styled.div`
     width: 100%;
     color: ${props => props.isDarkMode ? '#e0e0e0' : '#222260'};
     transition: all 0.3s ease;
+    
+    /* Mobile styles */
+    @media (max-width: 768px) {
+        padding: 0.875rem;
+        gap: 0.75rem;
+        border-radius: 16px;
+        flex-wrap: wrap;
+    }
+    
     .icon{
         width: 80px;
         height: 80px;
@@ -122,9 +131,30 @@ const IncomeItemStyled = styled.div`
         border: 2px solid ${props => props.isDarkMode 
             ? 'rgba(255, 255, 255, 0.1)' 
             : '#FFFFFF'};
+        flex-shrink: 0;
+        
+        @media (max-width: 768px) {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+        }
+        
+        @media (max-width: 480px) {
+            width: 50px;
+            height: 50px;
+        }
+        
         i{
             font-size: 2.6rem;
             color: ${props => props.isDarkMode ? '#667eea' : 'inherit'};
+            
+            @media (max-width: 768px) {
+                font-size: 2rem;
+            }
+            
+            @media (max-width: 480px) {
+                font-size: 1.6rem;
+            }
         }
     }
 
@@ -133,10 +163,25 @@ const IncomeItemStyled = styled.div`
         display: flex;
         flex-direction: column;
         gap: .2rem;
+        min-width: 0; /* Allows text to wrap */
+        
         h5{
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 2vw, 1.3rem);
             padding-left: 2rem;
             position: relative;
+            margin: 0;
+            word-wrap: break-word;
+            
+            @media (max-width: 768px) {
+                padding-left: 1.5rem;
+                font-size: 1.1rem;
+            }
+            
+            @media (max-width: 480px) {
+                padding-left: 1.25rem;
+                font-size: 1rem;
+            }
+            
             &::before{
                 content: '';
                 position: absolute;
@@ -147,6 +192,11 @@ const IncomeItemStyled = styled.div`
                 height: .8rem;
                 border-radius: 50%;
                 background: ${props => props.indicator};
+                
+                @media (max-width: 480px) {
+                    width: 0.6rem;
+                    height: 0.6rem;
+                }
             }
         }
 
@@ -154,16 +204,51 @@ const IncomeItemStyled = styled.div`
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
+            
+            @media (max-width: 768px) {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+            
             .text{
                 display: flex;
                 align-items: center;
                 gap: 1.5rem;
+                flex-wrap: wrap;
+                
+                @media (max-width: 768px) {
+                    gap: 1rem;
+                    width: 100%;
+                }
+                
+                @media (max-width: 480px) {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0.5rem;
+                }
+                
                 p{
                     display: flex;
                     align-items: center;
                     gap: 0.5rem;
                     color: ${props => props.isDarkMode ? '#e0e0e0' : 'var(--primary-color)'};
                     opacity: 0.8;
+                    font-size: clamp(0.85rem, 1.5vw, 1rem);
+                    margin: 0;
+                    
+                    @media (max-width: 480px) {
+                        font-size: 0.85rem;
+                    }
+                }
+            }
+            
+            .btn-con {
+                flex-shrink: 0;
+                
+                @media (max-width: 768px) {
+                    align-self: flex-end;
                 }
             }
         }

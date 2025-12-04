@@ -50,9 +50,16 @@ function Expenses() {
 const ExpensesStyled = styled.div`
     display: flex;
     overflow: auto;
+    
     h1 {
         color: ${props => props.isDarkMode ? '#e0e0e0' : 'inherit'};
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        
+        @media (max-width: 768px) {
+            font-size: 1.5rem;
+        }
     }
+    
     .total-income{
         display: flex;
         justify-content: center;
@@ -67,21 +74,56 @@ const ExpensesStyled = styled.div`
         border-radius: 20px;
         padding: 1rem;
         margin: 1rem 0;
-        font-size: 2rem;
+        font-size: clamp(1.2rem, 2.5vw, 2rem);
         gap: .5rem;
         color: ${props => props.isDarkMode ? '#e0e0e0' : 'inherit'};
         transition: all 0.3s ease;
+        
+        @media (max-width: 768px) {
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+        
         span{
-            font-size: 2.5rem;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
             font-weight: 800;
             color: var(--color-delete);
+            
+            @media (max-width: 768px) {
+                font-size: 1.5rem;
+            }
         }
     }
+    
     .income-content{
         display: flex;
         gap: 2rem;
+        
+        /* Tablet styles */
+        @media (max-width: 1024px) {
+            gap: 1.5rem;
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .form-container {
+            @media (max-width: 768px) {
+                width: 100%;
+            }
+        }
+        
         .incomes{
             flex: 1;
+            
+            @media (max-width: 768px) {
+                width: 100%;
+            }
         }
     }
 `;

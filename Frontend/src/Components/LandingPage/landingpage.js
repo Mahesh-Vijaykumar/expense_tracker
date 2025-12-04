@@ -185,9 +185,25 @@ const LandingPageStyled = styled.div`
         border: 1px solid rgba(255, 255, 255, 0.2);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 
-        @media (max-width: 968px) {
+        /* Tablet styles */
+        @media (max-width: 1024px) {
+            gap: 3rem;
+            padding: 2.5rem;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
             grid-template-columns: 1fr;
             gap: 2rem;
+            padding: 2rem;
+            border-radius: 20px;
+        }
+        
+        /* Small mobile */
+        @media (max-width: 480px) {
+            padding: 1.5rem;
+            gap: 1.5rem;
+            border-radius: 16px;
         }
     }
 
@@ -195,9 +211,14 @@ const LandingPageStyled = styled.div`
         color: white;
         
         .main-title {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 1.5rem;
             font-weight: 800;
+            
+            @media (max-width: 768px) {
+                margin-bottom: 1rem;
+                text-align: center;
+            }
             
             .gradient-text {
                 background: linear-gradient(45deg, #fff, #f0f0f0);
@@ -208,10 +229,15 @@ const LandingPageStyled = styled.div`
         }
 
         .subtitle {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 2vw, 1.3rem);
             margin-bottom: 2rem;
             opacity: 0.9;
             line-height: 1.6;
+            
+            @media (max-width: 768px) {
+                margin-bottom: 1.5rem;
+                text-align: center;
+            }
         }
 
         .features {
@@ -219,18 +245,32 @@ const LandingPageStyled = styled.div`
             flex-direction: column;
             gap: 1.5rem;
             margin-top: 2rem;
+            
+            @media (max-width: 768px) {
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
 
             .feature-item {
                 display: flex;
                 align-items: center;
                 gap: 1rem;
-                font-size: 1.1rem;
+                font-size: clamp(0.9rem, 2vw, 1.1rem);
+                
+                @media (max-width: 768px) {
+                    justify-content: center;
+                }
 
                 i {
-                    font-size: 1.5rem;
+                    font-size: clamp(1.2rem, 3vw, 1.5rem);
                     background: rgba(255, 255, 255, 0.2);
                     padding: 0.8rem;
                     border-radius: 12px;
+                    min-width: 48px;
+                    min-height: 48px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 }
             }
         }
@@ -242,20 +282,33 @@ const LandingPageStyled = styled.div`
             border-radius: 20px;
             padding: 2.5rem;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            
+            @media (max-width: 768px) {
+                padding: 2rem;
+                border-radius: 16px;
+            }
+            
+            @media (max-width: 480px) {
+                padding: 1.5rem;
+            }
 
             .form-header {
                 text-align: center;
                 margin-bottom: 2rem;
+                
+                @media (max-width: 768px) {
+                    margin-bottom: 1.5rem;
+                }
 
                 h2 {
-                    font-size: 2rem;
+                    font-size: clamp(1.5rem, 3vw, 2rem);
                     color: #333;
                     margin-bottom: 0.5rem;
                 }
 
                 p {
                     color: #666;
-                    font-size: 0.95rem;
+                    font-size: clamp(0.85rem, 1.5vw, 0.95rem);
                 }
             }
 
@@ -274,6 +327,7 @@ const LandingPageStyled = styled.div`
                         left: 1rem;
                         color: #667eea;
                         font-size: 1.1rem;
+                        z-index: 1;
                     }
 
                     input {
@@ -284,6 +338,12 @@ const LandingPageStyled = styled.div`
                         font-size: 1rem;
                         transition: all 0.3s ease;
                         background: #f8f9fa;
+                        min-height: 48px; /* Touch-friendly */
+                        
+                        @media (max-width: 768px) {
+                            padding: 0.875rem 0.875rem 0.875rem 2.75rem;
+                            font-size: 16px; /* Prevents zoom on iOS */
+                        }
 
                         &:focus {
                             outline: none;
@@ -314,6 +374,13 @@ const LandingPageStyled = styled.div`
                     cursor: pointer;
                     transition: all 0.3s ease;
                     margin-top: 0.5rem;
+                    min-height: 48px; /* Touch-friendly */
+                    width: 100%;
+                    
+                    @media (max-width: 768px) {
+                        padding: 0.875rem;
+                        font-size: 1rem;
+                    }
 
                     &:hover:not(:disabled) {
                         transform: translateY(-2px);

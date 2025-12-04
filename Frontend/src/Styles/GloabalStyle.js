@@ -30,6 +30,21 @@ export const GlobalStyles = createGlobalStyle`
         overflow: hidden;
         color:rgba(34,34,96,.6);
         transition: background-color 0.3s ease, color 0.3s ease;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Touch-friendly button sizes for mobile */
+    button, a, input[type="submit"], .clickable {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Better scrolling on mobile */
+    @media (max-width: 768px) {
+        body {
+            overflow: auto;
+        }
     }
     
     /* DatePicker dark mode styles */

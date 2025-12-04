@@ -79,6 +79,13 @@ const AppStyled=styled.div`
     background-position: center;
     position:relative;
     transition: all 0.3s ease;
+    overflow-y: auto;
+    
+    /* Mobile styles */
+    @media (max-width: 768px) {
+        height: auto;
+        min-height: 100vh;
+    }
     
     main{
         flex: 1;
@@ -91,6 +98,20 @@ const AppStyled=styled.div`
         overflow-x: hidden;
         color: ${props => props.isDarkMode ? '#e0e0e0' : 'inherit'};
         transition: all 0.3s ease;
+        
+        /* Tablet styles */
+        @media (max-width: 1024px) {
+            border-radius: 24px;
+            border-width: 2px;
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            border-radius: 20px;
+            border-width: 2px;
+            min-height: auto;
+        }
+        
         &::-webkit-scrollbar{
             width: 0;
         }

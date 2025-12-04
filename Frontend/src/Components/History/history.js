@@ -45,6 +45,11 @@ const HistoryStyled = styled.div`
 
     h2 {
         color: ${props => props.isDarkMode ? '#e0e0e0' : 'inherit'};
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        
+        @media (max-width: 768px) {
+            font-size: 1.5rem;
+        }
     }
 
     .history-item{
@@ -61,6 +66,22 @@ const HistoryStyled = styled.div`
         justify-content: space-between;
         align-items: center;
         transition: all 0.3s ease;
+        min-height: 60px;
+        
+        @media (max-width: 768px) {
+            padding: 0.875rem;
+            border-radius: 16px;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        p {
+            font-size: clamp(0.9rem, 2vw, 1rem);
+            
+            @media (max-width: 480px) {
+                font-size: 0.9rem;
+            }
+        }
     }
 `;
 
