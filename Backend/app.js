@@ -11,9 +11,9 @@ const PORT=process.env.PORT || 5000
 //Middlewares
 app.use(express.json());
 
-// CORS configuration - Allow all origins for now (can restrict later)
+// CORS configuration - Allow all origins
 app.use(cors({
-    origin: '*', // Allow all origins
+    origin: true, // Allow all origins (works with credentials)
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
