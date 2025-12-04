@@ -3,7 +3,21 @@ import axios from "axios";
 
 const AuthContext = createContext();
 
-const BASE_URL = process.env.REACT_APP_API_URL ? `${process.env.REACT_APP_API_URL}/auth/` : "http://localhost:5000/api/v1/auth/";
+// Construct base URL for auth endpoints
+const getBaseUrl = () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    if (!apiUrl) {
+        return "http://localhost:5000/api/v1/auth/";
+    }
+    // If API URL already includes /api/v1, use it as is
+    if (apiUrl.includes('/api/v1')) {
+        return `${apiUrl}/auth/`;
+    }
+    // Otherwise, append /api/v1/auth/
+    return `${apiUrl}/api/v1/auth/`;
+};
+
+const BASE_URL = getBaseUrl();
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
