@@ -3,7 +3,25 @@ import {useState, useContext} from "react";
 import axios from "axios";
 import Expenses from "../Components/Expenses/expenses";
 import {useAuth} from "./authContext";
-const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api/v1/";
+
+// Construct base URL ensuring it ends with /
+const getBaseUrl = () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    if (!apiUrl) {
+        return "http://localhost:5000/api/v1/";
+    }
+    // Remove trailing slash if present, then add it back to ensure consistency
+    const cleanUrl = apiUrl.replace(/\/$/, '');
+    // If URL already includes /api/v1, use it as is
+    if (cleanUrl.includes('/api/v1')) {
+        return `${cleanUrl}/`;
+    }
+    // Otherwise, append /api/v1/
+    return `${cleanUrl}/api/v1/`;
+};
+
+const BASE_URL = getBaseUrl();
+console.log('GlobalContext BASE_URL:', BASE_URL);
 
 const GlobalContext = React.createContext()
 
