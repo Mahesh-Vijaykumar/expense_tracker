@@ -123,10 +123,14 @@ const TransactionsStyled = styled.div`
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1.5rem;
+        
+        @media (max-width: 768px) {
+            margin-bottom: 1rem;
+        }
 
         h3 {
             color: ${props => props.isDarkMode ? '#e0e0e0' : '#333'};
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 2vw, 1.2rem);
             font-weight: 600;
             margin: 0;
         }
@@ -135,12 +139,13 @@ const TransactionsStyled = styled.div`
             background: transparent;
             border: none;
             color: ${props => props.isDarkMode ? '#667eea' : '#667eea'};
-            font-size: 0.9rem;
+            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
             font-weight: 600;
             cursor: pointer;
             padding: 0.5rem 1rem;
             border-radius: 8px;
             transition: all 0.3s ease;
+            min-height: 44px; /* Touch-friendly */
 
             &:hover {
                 background: ${props => props.isDarkMode 
