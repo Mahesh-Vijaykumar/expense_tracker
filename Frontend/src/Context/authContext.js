@@ -6,18 +6,32 @@ const AuthContext = createContext();
 // Construct base URL for auth endpoints
 const getBaseUrl = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
+    
+    // Default to localhost for development
     if (!apiUrl) {
-        return "http://localhost:5000/api/v1/auth/";
+        const defaultUrl = "http://localhost:5000/api/v1/auth/";
+        console.log('REACT_APP_API_URL not set, using default:', defaultUrl);
+        return defaultUrl;
     }
+    
+    // Remove trailing slash if present
+    const cleanUrl = apiUrl.replace(/\/$/, '');
+    
     // If API URL already includes /api/v1, use it as is
-    if (apiUrl.includes('/api/v1')) {
-        return `${apiUrl}/auth/`;
+    if (cleanUrl.includes('/api/v1')) {
+        const finalUrl = `${cleanUrl}/auth/`;
+        console.log('Using API URL with /api/v1:', finalUrl);
+        return finalUrl;
     }
+    
     // Otherwise, append /api/v1/auth/
-    return `${apiUrl}/api/v1/auth/`;
+    const finalUrl = `${cleanUrl}/api/v1/auth/`;
+    console.log('Appending /api/v1/auth/ to API URL:', finalUrl);
+    return finalUrl;
 };
 
 const BASE_URL = getBaseUrl();
+console.log('Final BASE_URL for auth:', BASE_URL);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
