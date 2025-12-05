@@ -137,6 +137,37 @@ function LandingPage({ onLoginSuccess }) {
                         </div>
                     </div>
                 </div>
+                <div className="about-section">
+                    <div className="about-content">
+                        <h3 className="about-title">
+                            <i className="fa-solid fa-code"></i>
+                            About This Project
+                        </h3>
+                        <p className="about-description">
+                            An open-source expense tracking application built with the MERN stack.
+                        </p>
+                        <div className="github-link">
+                            <a 
+                                href="https://github.com/Mahesh-Vijaykumar/expense_tracker" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="github-btn"
+                            >
+                                <i className="fa-brands fa-github"></i>
+                                View on GitHub
+                            </a>
+                        </div>
+                        <div className="developers">
+                            <h4 className="developers-title">Developed by:</h4>
+                            <div className="developers-list">
+                                <span className="developer-name">Mahesh</span>
+                                <span className="developer-name">Kishan N Gowda</span>
+                                <span className="developer-name">Nishchal S</span>
+                                <span className="developer-name">Prajwal S</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </LandingPageStyled>
     );
@@ -408,6 +439,144 @@ const LandingPageStyled = styled.div`
 
                     &:hover {
                         color: #764ba2;
+                    }
+                }
+            }
+        }
+    }
+
+    .about-section {
+        margin-top: 3rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        
+        @media (max-width: 768px) {
+            margin-top: 2rem;
+        }
+
+        .about-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            width: 100%;
+            
+            @media (max-width: 768px) {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+            
+            @media (max-width: 480px) {
+                padding: 1.25rem;
+            }
+
+            .about-title {
+                font-size: clamp(1.3rem, 3vw, 1.8rem);
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.75rem;
+                font-weight: 700;
+                
+                i {
+                    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+                }
+            }
+
+            .about-description {
+                font-size: clamp(0.9rem, 2vw, 1.1rem);
+                margin-bottom: 1.5rem;
+                opacity: 0.9;
+                line-height: 1.6;
+            }
+
+            .github-link {
+                margin-bottom: 2rem;
+                
+                @media (max-width: 768px) {
+                    margin-bottom: 1.5rem;
+                }
+
+                .github-btn {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.75rem;
+                    padding: 0.875rem 2rem;
+                    background: rgba(255, 255, 255, 0.2);
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 12px;
+                    font-size: clamp(0.95rem, 2vw, 1.1rem);
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+                    border: 2px solid rgba(255, 255, 255, 0.3);
+                    min-height: 48px; /* Touch-friendly */
+                    
+                    @media (max-width: 768px) {
+                        padding: 0.75rem 1.5rem;
+                    }
+
+                    i {
+                        font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+                    }
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.3);
+                        transform: translateY(-2px);
+                        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+                        border-color: rgba(255, 255, 255, 0.5);
+                    }
+
+                    &:active {
+                        transform: translateY(0);
+                    }
+                }
+            }
+
+            .developers {
+                .developers-title {
+                    font-size: clamp(0.95rem, 2vw, 1.1rem);
+                    margin-bottom: 1rem;
+                    opacity: 0.9;
+                    font-weight: 600;
+                }
+
+                .developers-list {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    gap: 1rem;
+                    
+                    @media (max-width: 480px) {
+                        gap: 0.75rem;
+                    }
+
+                    .developer-name {
+                        background: rgba(255, 255, 255, 0.15);
+                        padding: 0.6rem 1.2rem;
+                        border-radius: 10px;
+                        font-size: clamp(0.85rem, 1.8vw, 1rem);
+                        font-weight: 500;
+                        border: 1px solid rgba(255, 255, 255, 0.2);
+                        transition: all 0.3s ease;
+                        
+                        @media (max-width: 480px) {
+                            padding: 0.5rem 1rem;
+                            font-size: 0.85rem;
+                        }
+
+                        &:hover {
+                            background: rgba(255, 255, 255, 0.25);
+                            transform: translateY(-2px);
+                            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                        }
                     }
                 }
             }
